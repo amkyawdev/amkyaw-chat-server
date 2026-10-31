@@ -4,7 +4,9 @@ import android.content.Context
 import com.amkyawdev.chatserver.chat.ChatRoom
 import com.amkyawdev.chatserver.chat.ChatServer
 import com.amkyawdev.chatserver.chat.MessageSource
+import com.amkyawdev.chatserver.chat.PeerDiscovery
 import com.amkyawdev.chatserver.chat.PeerRelay
+import com.amkyawdev.chatserver.chat.WebClientServer
 import com.amkyawdev.chatserver.telegram.BotCommandHandler
 import com.amkyawdev.chatserver.telegram.TelegramBotService
 import com.amkyawdev.chatserver.telegram.TelegramConfig
@@ -40,6 +42,8 @@ class ServerManager(
 
     private var server: ChatServer? = null
     private var telegram: TelegramBotService? = null
+    private var webClient: WebClientServer? = null
+    private var discovery: PeerDiscovery? = null
 
     val username: String get() = prefs.username
     val port: Int get() = prefs.serverPort
@@ -78,11 +82,52 @@ class ServerManager(
                 LogHelper.e("server start failed: ${it.message}", it)
                 _state.value = _state.value.copy(serverState = ChatServer.State.ERROR)
             }
+
+        startWebClient()
+        startDiscovery()
+    }
+
+    /**
+     * Serves `assets/chat.html` on [port] so LAN peers can join from a browser
+     * without installing anything. The page talks to [ChatServer] over WebSocket.
+     */
+    private fun startWebClient() {
+        if (webClient != null) return
+        val client = WebClientServer(port + 1) {
+            runCatching {
+                context.assets.open("chat.html").use { it.readBytes() }
+                    .toString(Charsets.UTF_8)
+                    .replace(WS_PORT_TOKEN, port.toString())
+                    .toByteArray(Charsets.UTF_8)
+            }
+                .onFailure { LogHelper.e("chat.html unavailable: ${it.message}", it) }
+                .getOrNull()
+        }
+        webClient = client
+        client.start()
+    }
+
+    /** Advertises `_amkyaw._tcp` so peers find the host without typing an IP. */
+    private fun startDiscovery() {
+        if (discovery != null) return
+        val d = PeerDiscovery(
+            context = context,
+            serviceName = username,
+            port = port,
+            onFound = { info -> LogHelper.i("peer found: ${info.serviceName}") }
+        )
+        discovery = d
+        d.advertise()
+        d.discover()
     }
 
     fun stopServer() {
         server?.shutdown()
         server = null
+        webClient?.stop()
+        webClient = null
+        discovery?.stop()
+        discovery = null
         _state.value = _state.value.copy(serverState = ChatServer.State.STOPPED, peerCount = 0)
         LogHelper.i("server stopped")
     }
@@ -157,4 +202,9 @@ class ServerManager(
         val relayMessage: String = "[IDLE] relay not bound",
         val peerCount: Int = 0
     )
+
+    private companion object {
+        /** Replaced with the real WebSocket port when chat.html is served. */
+        const val WS_PORT_TOKEN = "__WS_PORT__"
+    }
 }

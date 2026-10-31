@@ -3,6 +3,7 @@ package com.amkyawdev.chatserver
 import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +13,7 @@ import com.amkyawdev.chatserver.databinding.ActivityMainBinding
 import com.amkyawdev.chatserver.telegram.TelegramBotService
 import com.amkyawdev.chatserver.telegram.TelegramConfig
 import com.amkyawdev.chatserver.ui.ChatActivity
+import com.amkyawdev.chatserver.util.Permissions
 import kotlinx.coroutines.launch
 
 /**
@@ -25,6 +27,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val manager: ServerManager get() = (application as AmkyawApp).serverManager
+
+    private var askedForPermissions = false
+
+    private val permissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,5 +124,18 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         ServerService.start(this)
         binding.txtIp.text = manager.endpoint
+        requestMissingPermissions()
+    }
+
+    /**
+     * The server starts without these, but the notification stays hidden and
+     * mDNS discovery fails, which reads as "the app does not work".
+     */
+    private fun requestMissingPermissions() {
+        if (askedForPermissions) return
+        val missing = Permissions.missing(this)
+        if (missing.isEmpty()) return
+        askedForPermissions = true
+        permissionLauncher.launch(missing)
     }
 }

@@ -4,19 +4,22 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import com.amkyawdev.chatserver.R
 
 /**
  * TextView that reveals its text one character at a time, with a trailing
  * block cursor. Used for the boot log; [onComplete] fires once the last
  * character is shown.
+ *
+ * Extends [AppCompatTextView] rather than the framework TextView so tinting and
+ * the app's theme attributes apply; AppCompat cannot substitute custom views.
  */
 class TypingTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = android.R.attr.textViewStyle
-) : TextView(context, attrs, defStyleAttr) {
+) : AppCompatTextView(context, attrs, defStyleAttr) {
 
     private val handler = Handler(Looper.getMainLooper())
     private var fullText: String = ""

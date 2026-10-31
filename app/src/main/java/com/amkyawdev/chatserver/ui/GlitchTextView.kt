@@ -4,19 +4,22 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.util.AttributeSet
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import com.amkyawdev.chatserver.R
 
 /**
  * TextView that can render RGB-split "glitch" echoes behind its text and be
  * shaken on demand. The jitter itself uses the @anim/glitch animation; the
  * colour-split is drawn here because no XML primitive can do it.
+ *
+ * Extends [AppCompatTextView] rather than the framework TextView so tinting and
+ * the app's theme attributes apply; AppCompat cannot substitute custom views.
  */
 class GlitchTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = android.R.attr.textViewStyle
-) : TextView(context, attrs, defStyleAttr) {
+) : AppCompatTextView(context, attrs, defStyleAttr) {
 
     private var glitchColor = Color.parseColor("#FF0040")
     private var glitchOffset = 2f
