@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>amkyaw server — UI mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ── Design tokens: mirrors res/values/colors.xml + dimens.xml ── */
+  :root{
+    --bg-void:#0a0e14;      --bg-surface:#0d1117;   --bg-surface-alt:#141a22;
+    --bg-bar:#111820;       --bg-btn-green:#0a2e0a; --bg-btn-green-pressed:#11411a;
+    --bg-btn-cyan:#0b1f2b;
+    --neon-green:#00ff41;   --neon-green-bright:#6bff9e; --neon-green-dim:#00b32e;
+    --cyan:#00d9ff;         --cyan-bright:#7debff;
+    --red-alert:#ff0040;    --yellow-alert:#ffd700;
+    --text-primary:#00ff41; --text-secondary:#5a7d5a; --text-dim:#2d4a2d;
+    --text-white:#c9d1d9;
+    --chrome-red:#ff5f56;   --chrome-yellow:#ffbd2e;  --chrome-green:#27c93f;
+    --glow-green-60:#00ff4199; --glow-green-40:#00ff4166; --glow-green-25:#00ff4140;
+    --glow-cyan-40:#00d9ff66;  --glow-yellow-40:#ffd70066;
+
+    --space-2:2px; --space-4:4px; --space-6:6px; --space-8:8px; --space-10:10px;
+    --space-12:12px; --space-14:14px; --space-16:16px; --space-20:20px; --space-24:24px;
+
+    --text-caption:10px; --text-boot:11px; --text-body:12px; --text-input:13px;
+    --text-button:14px; --text-prompt:16px;
+
+    --terminal-radius:4px; --bubble-radius:2px;
+    --mono:"JetBrains Mono","Fira Code","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:#05070a;
+    color:var(--text-secondary);
+    font-family:var(--mono);
+    font-size:var(--text-body);
+    padding:var(--space-24) var(--space-16) 64px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ── Page furniture ── */
+  .page-head{max-width:1180px;margin:0 auto var(--space-24)}
+  .page-head h1{
+    margin:0;font-size:20px;color:var(--neon-green);letter-spacing:.12em;
+    text-transform:uppercase;text-shadow:0 0 8px var(--glow-green-60);
+  }
+  .page-head p{margin:var(--space-8) 0 0;font-size:11px;color:var(--text-secondary);line-height:1.7}
+  .page-head .dim{color:var(--text-dim)}
+  .legend{display:flex;flex-wrap:wrap;gap:var(--space-12);margin-top:var(--space-12);font-size:10px}
+  .legend span{display:inline-flex;align-items:center;gap:6px;color:var(--text-secondary)}
+  .swatch{width:10px;height:10px;border:1px solid rgba(255,255,255,.15)}
+
+  .screens{display:flex;gap:var(--space-24);justify-content:center;flex-wrap:wrap;max-width:1180px;margin:0 auto}
+  .screen-col{display:flex;flex-direction:column;gap:var(--space-8);align-items:center}
+  .screen-label{font-size:10px;letter-spacing:.1em;color:var(--text-secondary);text-transform:uppercase}
+  .screen-label b{color:var(--cyan);font-weight:700}
+  .screen-label i{color:var(--text-dim);font-style:normal}
+
+  /* ── Phone frame: 360dp wide, portrait only ── */
+  .phone{
+    position:relative;width:360px;height:740px;overflow:hidden;
+    background:var(--bg-void);
+    border:1px solid #1c2530;border-radius:22px;
+    box-shadow:0 0 0 8px #0b0f14, 0 0 40px rgba(0,255,65,.07);
+  }
+  .screen{position:absolute;inset:0;overflow:hidden}
+
+  /* ── Effects ── */
+  .rain{position:absolute;inset:0;opacity:.25}
+  .rain.faint{opacity:.10}
+  .scanlines{
+    position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(
+      to bottom, rgba(0,255,65,.055) 0 1px, transparent 1px 3px);
+  }
+  .cursor-block{
+    display:inline-block;width:8px;height:16px;background:var(--neon-green);
+    box-shadow:0 0 6px var(--glow-green-60);vertical-align:-3px;
+    animation:blink 1s steps(1,end) infinite;
+  }
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+  /* ═══════════════ SCREEN 1 · BOOT ═══════════════ */
+  .boot{position:absolute;inset:0;display:flex;flex-direction:column;padding:var(--space-20)}
+  .boot .prompt{font-size:var(--text-boot);color:var(--text-secondary);letter-spacing:.05em}
+  .boot .log{
+    flex:1;display:flex;flex-direction:column;justify-content:center;
+    font-size:var(--text-boot);line-height:1.9;color:var(--text-secondary);
+    white-space:pre-wrap;
+  }
+  .boot .log .ok{color:var(--text-secondary)}
+  .boot .log .last{color:var(--neon-green);text-shadow:0 0 6px var(--glow-green-40)}
+  .boot .foot{display:flex;align-items:center;gap:var(--space-6);
+    font-size:var(--text-body);color:var(--neon-green);text-shadow:0 0 6px var(--glow-green-60)}
+
+  /* ═══════════════ SCREEN 2 · DASHBOARD ═══════════════ */
+  .dash{position:absolute;inset:0;overflow:hidden}
+  .dash .scroller{position:absolute;inset:0;overflow-y:auto;padding:var(--space-16);
+    scrollbar-width:none}
+  .dash .scroller::-webkit-scrollbar{display:none}
+
+  .terminal{
+    position:relative;background:var(--bg-surface);
+    border:1px solid var(--neon-green);border-radius:var(--terminal-radius);
+    padding:var(--space-16);
+    box-shadow:0 0 12px rgba(0,255,65,.10) inset, 0 0 10px rgba(0,255,65,.06);
+  }
+  .chrome{display:flex;align-items:center;gap:var(--space-6);padding-bottom:var(--space-10)}
+  .dot{width:8px;height:8px;border-radius:50%}
+  .dot.r{background:var(--chrome-red)} .dot.y{background:var(--chrome-yellow)} .dot.g{background:var(--chrome-green)}
+  .chrome .title{margin-left:auto;font-size:var(--text-caption);color:var(--text-secondary);letter-spacing:.05em}
+
+  .rule{height:1px;background:var(--glow-green-40);margin:var(--space-14) 0}
+  .rule.tight{margin:var(--space-10) 0}
+
+  .cmd{color:var(--text-primary);font-size:var(--text-body);text-shadow:0 0 4px var(--glow-green-40)}
+  .kv{display:flex;gap:0;margin-top:var(--space-6);font-size:var(--text-body);line-height:1.6}
+  .kv .k{width:88px;flex:0 0 88px;color:var(--text-primary);text-shadow:0 0 4px var(--glow-green-40)}
+  .kv .v{flex:1}
+  .v-green{color:var(--neon-green);text-shadow:0 0 6px var(--glow-green-60)}
+  .v-cyan{color:var(--cyan);text-shadow:0 0 6px var(--glow-cyan-40)}
+  .v-yellow{color:var(--yellow-alert);text-shadow:0 0 6px var(--glow-yellow-40)}
+  .v-dim{color:var(--text-secondary)}
+
+  .btn{
+    display:flex;align-items:center;justify-content:center;width:100%;
+    font-family:var(--mono);font-size:var(--text-button);font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;border-radius:var(--bubble-radius);
+    cursor:default;user-select:none;
+  }
+  .btn.primary{
+    height:48px;background:var(--bg-btn-green);border:1px solid var(--neon-green);
+    color:var(--neon-green);text-shadow:0 0 6px var(--glow-green-60);
+    box-shadow:0 0 10px rgba(0,255,65,.10);
+  }
+  .btn.primary:active{background:var(--bg-btn-green-pressed);border-color:var(--neon-green-bright);
+    color:var(--neon-green-bright);box-shadow:none;text-shadow:none}
+  .btn.secondary{
+    height:44px;background:var(--bg-surface-alt);border:1px solid var(--cyan);
+    color:var(--cyan);text-shadow:0 0 6px var(--glow-cyan-40);
+  }
+  .btn.secondary:active{background:var(--bg-btn-cyan);border-color:var(--cyan-bright);
+    color:var(--cyan-bright);box-shadow:none;text-shadow:none}
+  .btn + .btn{margin-top:var(--space-10)}
+
+  .field{
+    display:flex;align-items:center;width:100%;height:48px;margin-top:var(--space-10);
+    background:var(--bg-surface);border:1px solid var(--neon-green);border-radius:0;
+    padding:0 var(--space-12);color:var(--text-dim);font-size:var(--text-input);
+    text-shadow:0 0 4px var(--glow-green-25);
+  }
+  .field.focused{border-color:var(--neon-green-bright);color:var(--neon-green)}
+
+  .status-line{margin-top:var(--space-8);font-size:var(--text-caption);color:var(--text-dim);letter-spacing:.05em}
+  .status-line.ok{color:var(--cyan);text-shadow:0 0 6px var(--glow-cyan-40)}
+
+  .footer{text-align:center;margin-top:var(--space-20);font-size:var(--text-caption);
+    color:var(--text-dim);letter-spacing:.1em}
+
+  /* ═══════════════ SCREEN 3 · CHAT ═══════════════ */
+  .chat{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg-void)}
+  .chat-head{
+    flex:0 0 48px;display:flex;align-items:center;gap:var(--space-8);
+    background:var(--bg-bar);padding:0 var(--space-10);
+    border-bottom:1px solid var(--glow-green-40);
+  }
+  .chat-head .back{color:var(--neon-green);font-size:var(--text-body);
+    text-shadow:0 0 6px var(--glow-green-60);letter-spacing:.05em}
+  .live-dot{width:8px;height:8px;border-radius:50%;background:var(--neon-green);
+    box-shadow:0 0 8px 2px var(--glow-green-60)}
+  .chat-head .title{flex:1;font-size:var(--text-body);color:var(--neon-green);
+    text-shadow:0 0 4px var(--glow-green-40);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .chat-head .live{font-size:var(--text-caption);color:var(--red-alert);letter-spacing:.1em;
+    text-shadow:0 0 6px rgba(255,0,64,.5)}
+
+  .messages{
+    flex:1;overflow-y:auto;padding:var(--space-10);display:flex;flex-direction:column;
+    gap:var(--space-8);scrollbar-width:none;
+  }
+  .messages::-webkit-scrollbar{display:none}
+  .msg{max-width:78%;display:flex;flex-direction:column}
+  .msg.other{align-self:flex-start;align-items:flex-start}
+  .msg.mine{align-self:flex-end;align-items:flex-end}
+  .msg .sender{font-size:var(--text-caption);color:var(--cyan);letter-spacing:.05em;
+    margin-bottom:var(--space-2);text-shadow:0 0 4px var(--glow-cyan-40)}
+  .msg .bubble{
+    padding:var(--space-8);font-size:var(--text-input);line-height:1.5;
+    border-radius:var(--bubble-radius);white-space:pre-wrap;word-break:break-word;
+  }
+  .msg.other .bubble{background:var(--bg-surface-alt);border:1px solid var(--cyan);color:var(--text-white)}
+  .msg.mine .bubble{background:var(--bg-btn-green);border:1px solid var(--neon-green);
+    color:var(--neon-green);text-shadow:0 0 4px var(--glow-green-25)}
+  .msg .meta{font-size:var(--text-caption);color:var(--text-dim);margin-top:var(--space-2)}
+
+  .chat-input{
+    flex:0 0 56px;display:flex;align-items:center;gap:var(--space-8);
+    background:var(--bg-bar);border-top:1px solid var(--glow-green-40);
+    padding:0 var(--space-8) 0 var(--space-12);
+  }
+  .chat-input .caret{color:var(--neon-green);font-size:var(--text-prompt);font-weight:700;
+    text-shadow:0 0 6px var(--glow-green-60)}
+  .chat-input .box{flex:1;color:var(--text-dim);font-size:var(--text-input)}
+  .btn.send{
+    width:auto;min-width:72px;height:40px;padding:0 var(--space-12);
+    font-size:var(--text-body);background:var(--bg-btn-green);
+    border:1px solid var(--neon-green);color:var(--neon-green);
+    text-shadow:0 0 6px var(--glow-green-60);
+  }
+
+  /* ═══════════════ SPEC TABLE ═══════════════ */
+  .spec{max-width:1180px;margin:56px auto 0;border:1px solid #1c2530;background:var(--bg-surface);
+    border-radius:var(--terminal-radius)}
+  .spec h2{margin:0;padding:var(--space-14) var(--space-16);font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--neon-green);border-bottom:1px solid var(--glow-green-40)}
+  table{width:100%;border-collapse:collapse;font-size:11px}
+  th,td{text-align:left;padding:7px var(--space-16);border-bottom:1px solid #131a22}
+  th{color:var(--cyan);font-weight:700;letter-spacing:.06em}
+  td{color:var(--text-secondary)}
+  td code{color:var(--neon-green)}
+  tr:last-child td{border-bottom:0}
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <h1>amkyaw server · UI mockups</h1>
+  <p>AmkyawDev-Chat-Server — cyberpunk terminal chat server for Android.
+     360dp portrait, monospace only, neon glow instead of shadows.<br>
+     <span class="dim">Rendered at 1:1 with the values in res/values/colors.xml, dimens.xml and styles.xml.</span></p>
+  <div class="legend">
+    <span><i class="swatch" style="background:#0a0e14"></i>bg_void #0A0E14</span>
+    <span><i class="swatch" style="background:#0d1117"></i>bg_surface #0D1117</span>
+    <span><i class="swatch" style="background:#141a22"></i>bg_surface_alt #141A22</span>
+    <span><i class="swatch" style="background:#00ff41"></i>neon_green #00FF41</span>
+    <span><i class="swatch" style="background:#00d9ff"></i>cyan #00D9FF</span>
+    <span><i class="swatch" style="background:#ff0040"></i>red #FF0040</span>
+    <span><i class="swatch" style="background:#ffd700"></i>yellow #FFD700</span>
+    <span><i class="swatch" style="background:#5a7d5a"></i>text_secondary #5A7D5A</span>
+  </div>
+</header>
+
+<main class="screens">
+
+  <!-- ═══════════ SCREEN 1 · BOOT ═══════════ -->
+  <div class="screen-col">
+    <div class="screen-label"><b>SCREEN 1</b> · boot / splash <i>· 3.5s</i></div>
+    <div class="phone">
+      <div class="screen">
+        <canvas class="rain" data-rain></canvas>
+        <div class="scanlines"></div>
+        <div class="boot">
+          <div class="prompt">amkyaw@server:~$ ./boot.sh</div>
+          <div class="log" id="bootLog"></div>
+          <div class="foot">&gt;<span class="cursor-block"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ SCREEN 2 · DASHBOARD ═══════════ -->
+  <div class="screen-col">
+    <div class="screen-label"><b>SCREEN 2</b> · dashboard <i>· MainActivity</i></div>
+    <div class="phone">
+      <div class="screen dash">
+        <canvas class="rain faint" data-rain data-density=".7" data-speed=".6" data-flicker="0"></canvas>
+        <div class="scroller">
+          <div class="terminal">
+            <div class="chrome">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="title">amkyaw@server:~/</span>
+            </div>
+            <div class="rule tight"></div>
+
+            <div class="cmd">$ amkyaw --status</div>
+
+            <div class="kv"><span class="k">[+] IP      :</span><span class="v v-green">192.168.1.5:8080</span></div>
+            <div class="kv"><span class="k">[+] USER    :</span><span class="v v-cyan">User-5</span></div>
+            <div class="kv"><span class="k">[+] PORT    :</span><span class="v v-dim">8080 (WebSocket)</span></div>
+            <div class="kv"><span class="k">[+] STATE   :</span><span class="v v-yellow">ONLINE</span></div>
+
+            <div class="rule"></div>
+
+            <div class="cmd">$ ./start_chat.sh</div>
+            <div class="btn primary" style="margin-top:10px">[ &gt;_ OPEN_CHAT ]</div>
+
+            <div class="rule"></div>
+
+            <div class="cmd">$ ./telegram_relay.sh</div>
+            <div class="field">[ENTER] BOT_TOKEN</div>
+            <div class="btn secondary">[ &gt;_ ACTIVATE_BOT ]</div>
+            <div class="status-line ok">[ OK ] relay bound to @amkyaw_bot</div>
+          </div>
+          <div class="footer">[ SECURE LAN · END-TO-END LOCAL ]</div>
+        </div>
+        <div class="scanlines"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ SCREEN 3 · CHAT ═══════════ -->
+  <div class="screen-col">
+    <div class="screen-label"><b>SCREEN 3</b> · chat room <i>· ChatActivity</i></div>
+    <div class="phone">
+      <div class="screen chat">
+        <div class="chat-head">
+          <span class="back">[&lt;]</span>
+          <span class="live-dot"></span>
+          <span class="title">amkyaw@chat:~$</span>
+          <span class="live">[LIVE]</span>
+        </div>
+
+        <div class="messages">
+          <div class="msg other">
+            <span class="sender">[user-5]</span>
+            <div class="bubble">handshake complete. who's on the wire?</div>
+            <span class="meta">14:02</span>
+          </div>
+          <div class="msg mine">
+            <div class="bubble">amkyaw@server up · port :8080</div>
+            <span class="meta">14:02</span>
+          </div>
+          <div class="msg other">
+            <span class="sender">[user-5]</span>
+            <div class="bubble">roger. relaying to telegram now</div>
+            <span class="meta">14:03</span>
+          </div>
+          <div class="msg other">
+            <span class="sender">[amkyaw_bot]</span>
+            <div class="bubble">[ OK ] relay bound · 1 peer linked</div>
+            <span class="meta">14:03</span>
+          </div>
+          <div class="msg mine">
+            <div class="bubble">copy. opening the room to the LAN</div>
+            <span class="meta">14:04</span>
+          </div>
+          <div class="msg other">
+            <span class="sender">[user-5]</span>
+            <div class="bubble">$ tail -f /var/log/amkyaw.log</div>
+            <span class="meta">14:04</span>
+          </div>
+        </div>
+
+        <div class="chat-input">
+          <span class="caret">&gt;</span>
+          <span class="box">type message...<span class="cursor-block" style="height:14px;vertical-align:-2px"></span></span>
+          <span class="btn send">[SEND_]</span>
+        </div>
+        <div class="scanlines"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════ SPEC TABLE ═══════════ -->
+<section class="spec">
+  <h2>spacing &amp; type scale (dp / sp)</h2>
+  <table>
+    <tr><th>Element</th><th>Size</th><th>Colour token</th><th>Notes</th></tr>
+    <tr><td>Boot prompt</td><td>11sp</td><td><code>text_secondary</code></td><td>letter-spacing .05em</td></tr>
+    <tr><td>Terminal body / labels</td><td>12sp</td><td><code>neon_green</code></td><td>glow 4dp</td></tr>
+    <tr><td>Bubble text</td><td>13sp</td><td><code>text_white</code> / <code>neon_green</code></td><td>line-height 1.5</td></tr>
+    <tr><td>Button label</td><td>14sp</td><td><code>neon_green</code> / <code>cyan</code></td><td>bold, spacing .1em, uppercase</td></tr>
+    <tr><td>Input caret</td><td>16sp</td><td><code>neon_green</code></td><td>bold</td></tr>
+    <tr><td>Sender label / meta</td><td>10sp</td><td><code>cyan</code> / <code>text_dim</code></td><td>sender in brackets</td></tr>
+    <tr><td>Screen title</td><td>28sp</td><td><code>neon_green</code></td><td>glow 8dp, reserved</td></tr>
+    <tr><td>Terminal card</td><td>16dp pad</td><td>1dp <code>neon_green</code></td><td>4dp radius, inner glow</td></tr>
+    <tr><td>Primary button</td><td>48dp h</td><td><code>#0A2E0A</code> fill</td><td>2dp radius</td></tr>
+    <tr><td>Secondary button</td><td>44dp h</td><td><code>#141A22</code> fill</td><td>1dp cyan border</td></tr>
+    <tr><td>Input field</td><td>48dp h</td><td>square corners</td><td>bracket placeholder</td></tr>
+    <tr><td>Chat header</td><td>48dp h</td><td><code>bg_bar</code></td><td>8dp status dot, glow</td></tr>
+    <tr><td>Chat input bar</td><td>56dp h</td><td><code>bg_bar</code></td><td>prompt + field + [SEND_]</td></tr>
+    <tr><td>Bubble</td><td>78% max w</td><td>2dp radius</td><td>no elevation, no shadow</td></tr>
+    <tr><td>Cursor block</td><td>8×16dp</td><td><code>neon_green</code></td><td>500ms reverse blink</td></tr>
+  </table>
+</section>
+
+<script>
+/* ── Matrix rain: katakana columns, bright head, dimming tail ── */
+const GLYPHS = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789<>/\\|=+*#$%&";
+const TAIL = 14;
+
+function startRain(canvas){
+  const ctx = canvas.getContext("2d");
+  const density = parseFloat(canvas.dataset.density || "1");
+  const speed   = parseFloat(canvas.dataset.speed || "1");
+  const flicker = canvas.dataset.flicker !== "0";
+  let cols, cellW, cellH, drops, active;
+
+  function resize(){
+    const r = canvas.getBoundingClientRect();
+    canvas.width  = Math.max(1, Math.floor(r.width));
+    canvas.height = Math.max(1, Math.floor(r.height));
+    const size = 14;
+    cellW = size * 0.85; cellH = size * 1.05;
+    cols = Math.ceil(canvas.width / cellW);
+    drops  = Array.from({length: cols}, () => Math.random() * -canvas.height / cellH);
+    active = Array.from({length: cols}, () => Math.random() < density);
+    ctx.font = size + "px 'JetBrains Mono', monospace";
+  }
+
+  function frame(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let c = 0; c < cols; c++){
+      if (!active[c]) continue;
+      const head = Math.floor(drops[c]);
+      const x = c * cellW;
+      for (let t = 0; t < TAIL; t++){
+        const row = head - t;
+        if (row < 0) continue;
+        const y = row * cellH;
+        if (y > canvas.height) continue;
+        const g = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+        if (t === 0){
+          ctx.fillStyle = "#6bff9e";
+        } else {
+          let a = 255 - (t * 255 / TAIL);
+          if (flicker && t > TAIL / 2 && Math.random() < 0.1) a *= 0.4;
+          ctx.fillStyle = "rgba(0,255,65," + (a / 255).toFixed(3) + ")";
+        }
+        ctx.fillText(g, x, y);
+      }
+      drops[c] += (0.45 + Math.random() * 0.55) * speed;
+      if (drops[c] * cellH > canvas.height + TAIL * cellH) drops[c] = -Math.random() * 10;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+  requestAnimationFrame(frame);
+}
+document.querySelectorAll("[data-rain]").forEach(startRain);
+
+/* ── Boot log typewriter, mirroring TypingTextView ── */
+const BOOT_LINES = [
+  "[ OK ] Initializing amkyaw kernel...",
+  "[ OK ] Loading network modules...",
+  "[ OK ] Scanning WiFi interface...",
+  "[ OK ] Binding port :8080",
+  "[ OK ] Establishing peer links...",
+  "[ OK ] Connecting telegram relay...",
+  "[ OK ] amkyaw server ONLINE"
+];
+const bootLog = document.getElementById("bootLog");
+if (bootLog){
+  let line = 0, ch = 0;
+  const cursor = document.createElement("span");
+  cursor.textContent = "_";
+  cursor.style.color = "var(--neon-green)";
+
+  function tick(){
+    if (line >= BOOT_LINES.length){
+      setTimeout(() => { line = 0; ch = 0; bootLog.textContent = ""; tick(); }, 2600);
+      return;
+    }
+    const text = BOOT_LINES[line];
+    const span = document.createElement("div");
+    span.className = (line === BOOT_LINES.length - 1) ? "last" : "ok";
+    span.textContent = text.slice(0, ch + 1);
+    bootLog.textContent = "";
+    for (let i = 0; i < line; i++){
+      const d = document.createElement("div");
+      d.className = "ok";
+      d.textContent = BOOT_LINES[i];
+      bootLog.appendChild(d);
+    }
+    bootLog.appendChild(span);
+    if (ch < text.length - 1){
+      ch++;
+      setTimeout(tick, 45);
+    } else {
+      line++; ch = 0;
+      setTimeout(tick, 260);
+    }
+  }
+  tick();
+}
+</script>
+</body>
+</html>

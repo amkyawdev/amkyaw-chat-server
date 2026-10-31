@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- MatrixRainView -->
+    <declare-styleable name="MatrixRainView">
+        <attr name="rainColor" format="color" />
+        <attr name="rainHeadColor" format="color" />
+        <attr name="rainTextSize" format="dimension" />
+        <attr name="rainDensity" format="float" />
+        <attr name="rainSpeed" format="float" />
+        <attr name="rainFlicker" format="boolean" />
+    </declare-styleable>
+
+    <!-- ScanlineOverlay -->
+    <declare-styleable name="ScanlineOverlay">
+        <attr name="scanlineColor" format="color" />
+        <attr name="scanlineSpacing" format="dimension" />
+        <attr name="scanlineAlpha" format="float" />
+        <attr name="scanlineEnabled" format="boolean" />
+    </declare-styleable>
+
+    <!-- GlitchTextView -->
+    <declare-styleable name="GlitchTextView">
+        <attr name="glitchColor" format="color" />
+        <attr name="glitchOffset" format="dimension" />
+        <attr name="glitchIntensity" format="float" />
+    </declare-styleable>
+
+    <!-- TypingTextView -->
+    <declare-styleable name="TypingTextView">
+        <attr name="typeDelay" format="integer" />
+        <attr name="typeCursor" format="boolean" />
+        <attr name="typeCursorChar" format="string" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Own message bubble: right, #0A2E0A fill, 1dp neon-green border, 2dp radius. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/bg_btn_green" />
+    <stroke
+        android:width="@dimen/border_width"
+        android:color="@color/neon_green" />
+    <corners android:radius="@dimen/bubble_radius" />
+</shape>

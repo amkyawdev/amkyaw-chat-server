@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ═══════════════ SPACING (4dp grid) ═══════════════ -->
+    <dimen name="space_2">2dp</dimen>
+    <dimen name="space_4">4dp</dimen>
+    <dimen name="space_6">6dp</dimen>
+    <dimen name="space_8">8dp</dimen>
+    <dimen name="space_10">10dp</dimen>
+    <dimen name="space_12">12dp</dimen>
+    <dimen name="space_14">14dp</dimen>
+    <dimen name="space_16">16dp</dimen>
+    <dimen name="space_20">20dp</dimen>
+    <dimen name="space_24">24dp</dimen>
+    <dimen name="space_32">32dp</dimen>
+
+    <!-- ═══════════════ TYPOGRAPHY ═══════════════ -->
+    <dimen name="text_caption">10sp</dimen>
+    <dimen name="text_boot">11sp</dimen>
+    <dimen name="text_body">12sp</dimen>
+    <dimen name="text_input">13sp</dimen>
+    <dimen name="text_button">14sp</dimen>
+    <dimen name="text_prompt">16sp</dimen>
+    <dimen name="text_title">28sp</dimen>
+
+    <!-- ═══════════════ COMPONENT METRICS ═══════════════ -->
+    <dimen name="terminal_radius">4dp</dimen>
+    <dimen name="bubble_radius">2dp</dimen>
+    <dimen name="border_width">1dp</dimen>
+    <dimen name="btn_height_primary">48dp</dimen>
+    <dimen name="btn_height_secondary">44dp</dimen>
+    <dimen name="input_height">48dp</dimen>
+    <dimen name="chat_input_height">56dp</dimen>
+    <dimen name="chat_header_height">48dp</dimen>
+    <dimen name="status_dot">8dp</dimen>
+    <dimen name="chrome_dot">8dp</dimen>
+    <dimen name="cursor_w">8dp</dimen>
+    <dimen name="cursor_h">16dp</dimen>
+    <dimen name="bubble_max_width_pct">0.78</dimen>
+
+    <!-- ═══════════════ EFFECTS ═══════════════ -->
+    <dimen name="glow_radius_sm">4dp</dimen>
+    <dimen name="glow_radius_md">6dp</dimen>
+    <dimen name="glow_radius_lg">8dp</dimen>
+
+</resources>

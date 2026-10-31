@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Terminal block cursor: 8x16dp solid neon-green rectangle. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/neon_green" />
+    <size
+        android:width="@dimen/cursor_w"
+        android:height="@dimen/cursor_h" />
+</shape>

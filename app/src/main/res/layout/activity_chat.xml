@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SCREEN 3 — CHAT (ChatActivity)
+  Header (48dp) · message list (flex 1) · input bar (56dp).
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_void"
+    android:orientation="vertical">
+
+    <!-- ══════════ HEADER ══════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/chat_header_height"
+        android:background="@color/bg_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/space_10"
+        android:paddingEnd="@dimen/space_10">
+
+        <TextView
+            android:id="@+id/btnBack"
+            style="@style/Text.Amkyaw.Label"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingEnd="@dimen/space_8"
+            android:text="[&lt;]"
+            android:textSize="@dimen/text_body" />
+
+        <View
+            android:id="@+id/statusDot"
+            style="@style/Widget.Amkyaw.StatusDot"
+            android:background="@drawable/ic_status_dot"
+            android:backgroundTint="@color/status_dot_tint"
+            android:contentDescription="@string/cd_status_dot" />
+
+        <TextView
+            android:id="@+id/txtChatTitle"
+            style="@style/Text.Amkyaw.Label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_8"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/chat_title" />
+
+        <TextView
+            android:id="@+id/txtLive"
+            style="@style/Text.Amkyaw.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.1"
+            android:text="@string/chat_live"
+            android:textColor="@color/red_alert" />
+    </LinearLayout>
+
+    <View style="@style/Widget.Amkyaw.Divider" />
+
+    <!-- ══════════ MESSAGE LIST ══════════ -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/bg_void">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerMessages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="@dimen/space_10"
+            android:scrollbars="none"
+            app:stackFromEnd="true" />
+
+        <TextView
+            android:id="@+id/txtEmpty"
+            style="@style/Text.Amkyaw.Dim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="$ awaiting first packet_"
+            android:textSize="@dimen/text_caption" />
+    </FrameLayout>
+
+    <View style="@style/Widget.Amkyaw.Divider" />
+
+    <!-- ══════════ INPUT BAR ══════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/chat_input_height"
+        android:background="@color/bg_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/space_12"
+        android:paddingEnd="@dimen/space_8">
+
+        <TextView
+            style="@style/Text.Amkyaw.Prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chat_input_prompt"
+            android:textSize="@dimen/text_prompt" />
+
+        <EditText
+            android:id="@+id/inputMessage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/space_8"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:fontFamily="@font/jetbrains_mono"
+            android:hint="@string/chat_input_hint"
+            android:imeOptions="actionSend"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLines="4"
+            android:padding="0dp"
+            android:shadowColor="@color/glow_green_25"
+            android:shadowRadius="@dimen/glow_radius_sm"
+            android:textColor="@color/neon_green"
+            android:textColorHint="@color/text_dim"
+            android:textCursorDrawable="@drawable/cursor"
+            android:textSize="@dimen/text_input" />
+
+        <Button
+            android:id="@+id/btnSend"
+            style="@style/Button.Amkyaw.Send"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="@dimen/space_8"
+            android:minWidth="72dp"
+            android:text="@string/chat_send" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Glow halo behind the status dot / logo: radial neon-green falloff. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <gradient
+        android:type="radial"
+        android:gradientRadius="14dp"
+        android:startColor="@color/glow_green_60"
+        android:centerColor="@color/glow_green_25"
+        android:endColor="@color/transparent" />
+</shape>

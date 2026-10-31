@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Message row — OTHER user.
+  Left aligned, cyan-bordered bubble, sender label above the text.
+  Max width (78% of list) is applied in MessageAdapter.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="start"
+    android:paddingTop="@dimen/space_4"
+    android:paddingBottom="@dimen/space_4">
+
+    <TextView
+        android:id="@+id/txtSender"
+        style="@style/Text.Amkyaw.SenderLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_2"
+        android:text="[user-5]" />
+
+    <TextView
+        android:id="@+id/txtMessage"
+        style="@style/Text.Amkyaw.BubbleOther"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_message_other"
+        android:lineSpacingExtra="2dp"
+        android:maxWidth="280dp"
+        android:padding="@dimen/space_8"
+        android:text="message" />
+
+    <TextView
+        android:id="@+id/txtMeta"
+        style="@style/Text.Amkyaw.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_2"
+        android:textColor="@color/text_dim"
+        android:text="--:--" />
+
+</LinearLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Backup rules (Android 11 and below).
+  The Telegram bot token is a credential: it is excluded from backup and from
+  device transfer so it never leaves the phone's private sandbox.
+-->
+<full-backup-content>
+    <exclude
+        domain="sharedpref"
+        path="amkyaw_prefs.xml" />
+</full-backup-content>

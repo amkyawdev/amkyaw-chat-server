@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme: near-black, no action bar, portrait-only UI. -->
+    <style name="Theme.AmkyawServer" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/bg_void</item>
+        <item name="android:colorBackground">@color/bg_void</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/text_dim</item>
+        <item name="colorAccent">@color/neon_green</item>
+        <item name="colorControlActivated">@color/neon_green</item>
+        <item name="colorControlNormal">@color/neon_green</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@color/bg_void</item>
+        <item name="android:navigationBarColor">@color/bg_void</item>
+        <item name="android:windowAnimationStyle">@style/Animation.Terminal</item>
+    </style>
+
+    <!-- Boot screen: full-bleed, no system chrome. -->
+    <style name="Theme.AmkyawServer.Boot" parent="Theme.AmkyawServer">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Animation.Terminal" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/fade_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
+    </style>
+
+</resources>

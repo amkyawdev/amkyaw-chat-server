@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SCREEN 1 — BOOT / SPLASH
+  Full-bleed near-black, matrix rain at 25% opacity, typewriter boot log,
+  blinking block cursor. Auto-advances to the dashboard after 3.5s.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_void">
+
+    <com.amkyawdev.chatserver.ui.MatrixRainView
+        android:id="@+id/matrixRain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.25"
+        app:rainColor="@color/neon_green"
+        app:rainHeadColor="@color/neon_green_bright"
+        app:rainTextSize="14dp"
+        app:rainDensity="1.0"
+        app:rainSpeed="1.0"
+        app:rainFlicker="true" />
+
+    <com.amkyawdev.chatserver.ui.ScanlineOverlay
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:scanlineColor="@color/neon_green"
+        app:scanlineAlpha="0.05"
+        app:scanlineSpacing="3dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/space_20">
+
+        <!-- amkyaw@server:~$ ./boot.sh -->
+        <TextView
+            android:id="@+id/bootPrompt"
+            style="@style/Text.Amkyaw.Dim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/boot_prompt"
+            android:textSize="@dimen/text_boot"
+            android:letterSpacing="0.05" />
+
+        <!-- Typewriter boot log, vertically centred, left aligned. -->
+        <com.amkyawdev.chatserver.ui.TypingTextView
+            android:id="@+id/bootLog"
+            style="@style/Text.Amkyaw.Dim"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/text_boot"
+            android:lineSpacingExtra="6dp"
+            app:typeDelay="45"
+            app:typeCursor="true"
+            app:typeCursorChar="_" />
+
+        <!-- Bottom blinking cursor row -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                style="@style/Text.Amkyaw.Prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chat_input_prompt"
+                android:textSize="@dimen/text_body" />
+
+            <View
+                android:id="@+id/bootCursor"
+                android:layout_width="@dimen/cursor_w"
+                android:layout_height="@dimen/cursor_h"
+                android:layout_marginStart="@dimen/space_6"
+                android:background="@drawable/cursor" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

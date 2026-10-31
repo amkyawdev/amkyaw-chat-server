@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">amkyaw server</string>
+    <string name="app_name_terminal">amkyaw@server</string>
+
+    <!-- Boot -->
+    <string name="boot_prompt">amkyaw@server:~$ ./boot.sh</string>
+    <string name="boot_cursor">_</string>
+    <string name="boot_line_1">[ OK ] Initializing amkyaw kernel...</string>
+    <string name="boot_line_2">[ OK ] Loading network modules...</string>
+    <string name="boot_line_3">[ OK ] Scanning WiFi interface...</string>
+    <string name="boot_line_4">[ OK ] Binding port :8080</string>
+    <string name="boot_line_5">[ OK ] Establishing peer links...</string>
+    <string name="boot_line_6">[ OK ] Connecting telegram relay...</string>
+    <string name="boot_line_7">[ OK ] amkyaw server ONLINE</string>
+
+    <!-- Dashboard -->
+    <string name="dash_title">amkyaw@server:~/</string>
+    <string name="dash_status_cmd">$ amkyaw --status</string>
+    <string name="dash_chat_cmd">$ ./start_chat.sh</string>
+    <string name="dash_relay_cmd">$ ./telegram_relay.sh</string>
+    <string name="dash_label_ip">[+] IP      :</string>
+    <string name="dash_label_user">[+] USER    :</string>
+    <string name="dash_label_port">[+] PORT    :</string>
+    <string name="dash_label_state">[+] STATE   :</string>
+    <string name="dash_port_value">8080 (WebSocket)</string>
+    <string name="dash_state_online">ONLINE</string>
+    <string name="dash_state_offline">OFFLINE</string>
+    <string name="dash_btn_open_chat">[ &gt;_ OPEN_CHAT ]</string>
+    <string name="dash_btn_activate_bot">[ &gt;_ ACTIVATE_BOT ]</string>
+    <string name="dash_btn_stop_bot">[ &gt;_ DEACTIVATE_BOT ]</string>
+    <string name="dash_hint_token">[ENTER] BOT_TOKEN</string>
+    <string name="dash_footer">[ SECURE LAN · END-TO-END LOCAL ]</string>
+    <string name="dash_unknown_ip">0.0.0.0:8080</string>
+
+    <!-- Chat -->
+    <string name="chat_title">amkyaw@chat:~$</string>
+    <string name="chat_live">[LIVE]</string>
+    <string name="chat_input_prompt">&gt;</string>
+    <string name="chat_input_hint">type message...</string>
+    <string name="chat_send">[SEND_]</string>
+    <string name="chat_back">&lt; EXIT</string>
+
+    <!-- Notification -->
+    <string name="notif_channel_name">amkyaw server</string>
+    <string name="notif_channel_desc">Server + relay status</string>
+    <string name="notif_title">amkyaw server</string>
+    <string name="notif_text">[+] listening on %1$s</string>
+    <string name="notif_action_stop">[STOP_]</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_status_dot">connection status</string>
+    <string name="cd_send">send message</string>
+</resources>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ════════════════════════════════════════════════════════════
+         TYPOGRAPHY
+         Monospace everywhere. Glow is a TextView shadow layer
+         (dx=0, dy=0, radius 4-8dp) — never a drop shadow.
+         ════════════════════════════════════════════════════════════ -->
+
+    <style name="Text.Amkyaw" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/jetbrains_mono</item>
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Text.Amkyaw.Title">
+        <item name="android:textSize">@dimen/text_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:shadowColor">@color/glow_green_60</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">@dimen/glow_radius_lg</item>
+    </style>
+
+    <style name="Text.Amkyaw.Label">
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:shadowColor">@color/glow_green_40</item>
+        <item name="android:shadowRadius">@dimen/glow_radius_sm</item>
+    </style>
+
+    <style name="Text.Amkyaw.Cyan">
+        <item name="android:textColor">@color/cyan</item>
+        <item name="android:shadowColor">@color/glow_cyan_40</item>
+        <item name="android:shadowRadius">@dimen/glow_radius_sm</item>
+    </style>
+
+    <style name="Text.Amkyaw.Yellow">
+        <item name="android:textColor">@color/yellow_alert</item>
+        <item name="android:shadowColor">@color/glow_yellow_40</item>
+        <item name="android:shadowRadius">@dimen/glow_radius_sm</item>
+    </style>
+
+    <style name="Text.Amkyaw.Dim">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:shadowRadius">0</item>
+    </style>
+
+    <style name="Text.Amkyaw.Caption">
+        <item name="android:textSize">@dimen/text_caption</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:shadowRadius">0</item>
+    </style>
+
+    <style name="Text.Amkyaw.Prompt">
+        <item name="android:textColor">@color/neon_green</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">@color/glow_green_60</item>
+        <item name="android:shadowRadius">@dimen/glow_radius_md</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         BUTTONS
+         Sharp (2dp), thin 1dp neon border, uppercase + letter-spacing.
+         Pressed state = brighter fill, glow removed.
+         ════════════════════════════════════════════════════════════ -->
+
+    <style name="Button.Amkyaw" parent="android:Widget.Button">
+        <item name="android:fontFamily">@font/jetbrains_mono</item>
+        <item name="android:textSize">@dimen/text_button</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:background">@drawable/bg_btn_green</item>
+        <item name="android:textColor">@color/btn_green_text</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:minHeight">@dimen/btn_height_primary</item>
+        <item name="android:paddingStart">@dimen/space_12</item>
+        <item name="android:paddingEnd">@dimen/space_12</item>
+        <item name="android:shadowColor">@color/glow_green_60</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">@dimen/glow_radius_md</item>
+    </style>
+
+    <style name="Button.Amkyaw.Secondary">
+        <item name="android:background">@drawable/bg_btn_cyan</item>
+        <item name="android:textColor">@color/cyan</item>
+        <item name="android:minHeight">@dimen/btn_height_secondary</item>
+        <item name="android:shadowColor">@color/glow_cyan_40</item>
+    </style>
+
+    <style name="Button.Amkyaw.Send">
+        <item name="android:minWidth">72dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:textSize">@dimen/text_body</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         INPUT FIELDS — square, 1dp glowing border, bracket placeholder
+         ════════════════════════════════════════════════════════════ -->
+
+    <style name="Input.Amkyaw" parent="android:Widget.EditText">
+        <item name="android:fontFamily">@font/jetbrains_mono</item>
+        <item name="android:textSize">@dimen/text_input</item>
+        <item name="android:textColor">@color/neon_green</item>
+        <item name="android:textColorHint">@color/text_dim</item>
+        <item name="android:background">@drawable/bg_input</item>
+        <item name="android:minHeight">@dimen/input_height</item>
+        <item name="android:paddingStart">@dimen/space_12</item>
+        <item name="android:paddingEnd">@dimen/space_12</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:shadowColor">@color/glow_green_25</item>
+        <item name="android:shadowRadius">@dimen/glow_radius_sm</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         TERMINAL FRAME
+         ════════════════════════════════════════════════════════════ -->
+
+    <!-- Base styles: dotted names below inherit from these implicitly, so they
+         must exist. parent="" disables that lookup so no framework style is
+         required. -->
+    <style name="Widget.Amkyaw" parent="" />
+
+    <style name="Widget.Amkyaw.Bubble" parent="" />
+
+    <style name="Widget.Amkyaw.Terminal">
+        <item name="android:background">@drawable/bg_terminal</item>
+        <item name="android:padding">@dimen/space_16</item>
+    </style>
+
+    <style name="Widget.Amkyaw.ChromeDot">
+        <item name="android:layout_width">@dimen/chrome_dot</item>
+        <item name="android:layout_height">@dimen/chrome_dot</item>
+    </style>
+
+    <style name="Widget.Amkyaw.StatusDot">
+        <item name="android:layout_width">@dimen/status_dot</item>
+        <item name="android:layout_height">@dimen/status_dot</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         MESSAGE BUBBLES — sharp 2dp, 78% max width, no elevation
+         ════════════════════════════════════════════════════════════ -->
+
+    <style name="Widget.Amkyaw.Bubble.Other">
+        <item name="android:background">@drawable/bg_message_other</item>
+        <item name="android:padding">@dimen/space_8</item>
+        <item name="android:maxWidth">280dp</item>
+    </style>
+
+    <style name="Widget.Amkyaw.Bubble.Mine">
+        <item name="android:background">@drawable/bg_message_mine</item>
+        <item name="android:padding">@dimen/space_8</item>
+        <item name="android:maxWidth">280dp</item>
+    </style>
+
+    <style name="Text.Amkyaw.BubbleOther">
+        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textSize">@dimen/text_input</item>
+        <item name="android:shadowRadius">0</item>
+    </style>
+
+    <style name="Text.Amkyaw.BubbleMine">
+        <item name="android:textColor">@color/neon_green</item>
+        <item name="android:textSize">@dimen/text_input</item>
+        <item name="android:shadowColor">@color/glow_green_25</item>
+        <item name="android:shadowRadius">@dimen/glow_radius_sm</item>
+    </style>
+
+    <style name="Text.Amkyaw.SenderLabel">
+        <item name="android:textColor">@color/cyan</item>
+        <item name="android:textSize">@dimen/text_caption</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:shadowColor">@color/glow_cyan_40</item>
+        <item name="android:shadowRadius">@dimen/glow_radius_sm</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         DIVIDER
+         ════════════════════════════════════════════════════════════ -->
+
+    <style name="Widget.Amkyaw.Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/border_width</item>
+        <item name="android:background">@color/glow_green_40</item>
+    </style>
+
+</resources>

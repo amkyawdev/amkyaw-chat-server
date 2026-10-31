@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Send glyph: right chevron, terminal style. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="20"
+    android:viewportHeight="20">
+    <path
+        android:strokeColor="@color/neon_green"
+        android:strokeWidth="2"
+        android:strokeLineCap="square"
+        android:strokeLineJoin="miter"
+        android:pathData="M4,3 L16,10 L4,17" />
+</vector>

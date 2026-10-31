@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ═══════════════ SURFACES ═══════════════ -->
+    <color name="bg_void">#FF0A0E14</color>
+    <color name="bg_surface">#FF0D1117</color>
+    <color name="bg_surface_alt">#FF141A22</color>
+    <color name="bg_bar">#FF111820</color>
+    <color name="bg_btn_green">#FF0A2E0A</color>
+    <color name="bg_btn_green_pressed">#FF11411A</color>
+    <color name="bg_btn_cyan">#FF0B1F2B</color>
+    <color name="bg_terminal_body">#FF0D1117</color>
+
+    <!-- ═══════════════ NEON ACCENTS ═══════════════ -->
+    <color name="neon_green">#FF00FF41</color>
+    <color name="neon_green_bright">#FF6BFF9E</color>
+    <color name="neon_green_dim">#FF00B32E</color>
+    <color name="cyan">#FF00D9FF</color>
+    <color name="cyan_bright">#FF7DEBFF</color>
+    <color name="red_alert">#FFFF0040</color>
+    <color name="yellow_alert">#FFFFD700</color>
+
+    <!-- ═══════════════ TEXT ═══════════════ -->
+    <color name="text_primary">#FF00FF41</color>
+    <color name="text_secondary">#FF5A7D5A</color>
+    <color name="text_dim">#FF2D4A2D</color>
+    <color name="text_white">#FFC9D1D9</color>
+
+    <!-- ═══════════════ CHROME DOTS ═══════════════ -->
+    <color name="chrome_red">#FFFF5F56</color>
+    <color name="chrome_yellow">#FFFFBD2E</color>
+    <color name="chrome_green">#FF27C93F</color>
+
+    <!-- ═══════════════ STATUS INDICATORS ═══════════════ -->
+    <color name="status_online">#FF00FF41</color>
+    <color name="status_connecting">#FFFFD700</color>
+    <color name="status_offline">#FFFF0040</color>
+
+    <!-- ═══════════════ GLOW HALOS (translucent neon) ═══════════════ -->
+    <color name="glow_green_60">#9900FF41</color>
+    <color name="glow_green_40">#6600FF41</color>
+    <color name="glow_green_25">#4000FF41</color>
+    <color name="glow_green_15">#2600FF41</color>
+    <color name="glow_cyan_40">#6600D9FF</color>
+    <color name="glow_red_40">#66FF0040</color>
+    <color name="glow_yellow_40">#66FFD700</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="scrim">#CC0A0E14</color>
+
+</resources>

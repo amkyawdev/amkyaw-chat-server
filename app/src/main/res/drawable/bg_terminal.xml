@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Terminal window frame: 4dp radius, 1dp neon-green border. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/bg_terminal_body" />
+    <stroke
+        android:width="@dimen/border_width"
+        android:color="@color/neon_green" />
+    <corners android:radius="@dimen/terminal_radius" />
+</shape>

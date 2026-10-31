@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Launcher foreground: ">_" prompt glyph with neon glow halo. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="@color/glow_green_25"
+        android:pathData="M54,22a32,32 0 1,0 0.1,0z" />
+    <path
+        android:strokeColor="@color/neon_green"
+        android:strokeWidth="6"
+        android:strokeLineCap="square"
+        android:strokeLineJoin="miter"
+        android:pathData="M38,40 L52,54 L38,68" />
+    <path
+        android:strokeColor="@color/neon_green"
+        android:strokeWidth="6"
+        android:strokeLineCap="square"
+        android:pathData="M58,68 L74,68" />
+</vector>

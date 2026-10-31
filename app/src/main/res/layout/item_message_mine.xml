@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Message row — MINE.
+  Right aligned, neon-green bordered bubble, no sender label.
+  Max width (78% of list) is applied in MessageAdapter.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="end"
+    android:paddingTop="@dimen/space_4"
+    android:paddingBottom="@dimen/space_4">
+
+    <TextView
+        android:id="@+id/txtMessage"
+        style="@style/Text.Amkyaw.BubbleMine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_message_mine"
+        android:lineSpacingExtra="2dp"
+        android:maxWidth="280dp"
+        android:padding="@dimen/space_8"
+        android:text="message" />
+
+    <TextView
+        android:id="@+id/txtMeta"
+        style="@style/Text.Amkyaw.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_2"
+        android:textColor="@color/text_dim"
+        android:text="--:--" />
+
+</LinearLayout>

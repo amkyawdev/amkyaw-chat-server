@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Data extraction rules (Android 12+).
+  Credentials are excluded from both cloud backup and device-to-device
+  transfer; nothing else is worth carrying over.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude
+            domain="sharedpref"
+            path="amkyaw_prefs.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude
+            domain="sharedpref"
+            path="amkyaw_prefs.xml" />
+    </device-transfer>
+</data-extraction-rules>

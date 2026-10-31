@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Server glyph: rack-mounted unit drawn in neon-green strokes. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="@color/neon_green">
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M4,3h16a1,1 0 0,1 1,1v5a1,1 0 0,1 -1,1H4a1,1 0 0,1 -1,-1V4a1,1 0 0,1 1,-1zM4,14h16a1,1 0 0,1 1,1v5a1,1 0 0,1 -1,1H4a1,1 0 0,1 -1,-1v-5a1,1 0 0,1 1,-1z" />
+    <path
+        android:fillColor="@color/bg_void"
+        android:pathData="M6,5.5h2v2H6zM6,16.5h2v2H6zM10,6h7v1.2h-7zM10,17h7v1.2h-7z" />
+</vector>

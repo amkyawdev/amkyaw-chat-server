@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SCREEN 2 — DASHBOARD (MainActivity)
+  ScrollView containing a single terminal window: status readout, chat
+  launcher, and the Telegram relay token entry.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_void"
+    android:fillViewport="true"
+    android:scrollbarStyle="insideOverlay"
+    android:scrollbars="none">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Faint matrix rain behind the terminal card. -->
+        <com.amkyawdev.chatserver.ui.MatrixRainView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.10"
+            app:rainColor="@color/neon_green"
+            app:rainHeadColor="@color/neon_green_bright"
+            app:rainTextSize="14dp"
+            app:rainDensity="0.7"
+            app:rainSpeed="0.6"
+            app:rainFlicker="false" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/space_16">
+
+            <!-- ══════════ TERMINAL WINDOW ══════════ -->
+            <LinearLayout
+                android:id="@+id/terminalCard"
+                style="@style/Widget.Amkyaw.Terminal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Window chrome -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/space_10">
+
+                    <View
+                        style="@style/Widget.Amkyaw.ChromeDot"
+                        android:background="@drawable/ic_status_dot"
+                        android:backgroundTint="@color/chrome_red" />
+
+                    <View
+                        style="@style/Widget.Amkyaw.ChromeDot"
+                        android:layout_marginStart="@dimen/space_6"
+                        android:background="@drawable/ic_status_dot"
+                        android:backgroundTint="@color/chrome_yellow" />
+
+                    <View
+                        style="@style/Widget.Amkyaw.ChromeDot"
+                        android:layout_marginStart="@dimen/space_6"
+                        android:background="@drawable/ic_status_dot"
+                        android:backgroundTint="@color/chrome_green" />
+
+                    <TextView
+                        style="@style/Text.Amkyaw.Caption"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/space_12"
+                        android:gravity="end"
+                        android:text="@string/dash_title"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+
+                <View style="@style/Widget.Amkyaw.Divider" />
+
+                <!-- Terminal body -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/space_12">
+
+                    <TextView
+                        style="@style/Text.Amkyaw.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dash_status_cmd" />
+
+                    <!-- [+] IP -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/Text.Amkyaw.Label"
+                            android:layout_width="88dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dash_label_ip" />
+
+                        <TextView
+                            android:id="@+id/txtIp"
+                            style="@style/Text.Amkyaw.Label"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/dash_unknown_ip" />
+                    </LinearLayout>
+
+                    <!-- [+] USER -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_6"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/Text.Amkyaw.Label"
+                            android:layout_width="88dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dash_label_user" />
+
+                        <TextView
+                            android:id="@+id/txtUser"
+                            style="@style/Text.Amkyaw.Cyan"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/dash_state_offline" />
+                    </LinearLayout>
+
+                    <!-- [+] PORT -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_6"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/Text.Amkyaw.Label"
+                            android:layout_width="88dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dash_label_port" />
+
+                        <TextView
+                            android:id="@+id/txtPort"
+                            style="@style/Text.Amkyaw.Dim"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/dash_port_value" />
+                    </LinearLayout>
+
+                    <!-- [+] STATE -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_6"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/Text.Amkyaw.Label"
+                            android:layout_width="88dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dash_label_state" />
+
+                        <TextView
+                            android:id="@+id/txtState"
+                            style="@style/Text.Amkyaw.Yellow"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/dash_state_offline" />
+                    </LinearLayout>
+
+                    <View
+                        style="@style/Widget.Amkyaw.Divider"
+                        android:layout_marginTop="@dimen/space_14"
+                        android:layout_marginBottom="@dimen/space_14" />
+
+                    <!-- ./start_chat.sh -->
+                    <TextView
+                        style="@style/Text.Amkyaw.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dash_chat_cmd" />
+
+                    <Button
+                        android:id="@+id/btnOpenChat"
+                        style="@style/Button.Amkyaw"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/btn_height_primary"
+                        android:layout_marginTop="@dimen/space_10"
+                        android:text="@string/dash_btn_open_chat" />
+
+                    <View
+                        style="@style/Widget.Amkyaw.Divider"
+                        android:layout_marginTop="@dimen/space_16"
+                        android:layout_marginBottom="@dimen/space_14" />
+
+                    <!-- ./telegram_relay.sh -->
+                    <TextView
+                        style="@style/Text.Amkyaw.Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dash_relay_cmd" />
+
+                    <EditText
+                        android:id="@+id/inputToken"
+                        style="@style/Input.Amkyaw"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/input_height"
+                        android:layout_marginTop="@dimen/space_10"
+                        android:autofillHints=""
+                        android:hint="@string/dash_hint_token"
+                        android:imeOptions="actionDone"
+                        android:inputType="textVisiblePassword" />
+
+                    <Button
+                        android:id="@+id/btnActivateBot"
+                        style="@style/Button.Amkyaw.Secondary"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/btn_height_secondary"
+                        android:layout_marginTop="@dimen/space_10"
+                        android:text="@string/dash_btn_activate_bot" />
+
+                    <TextView
+                        android:id="@+id/txtRelayStatus"
+                        style="@style/Text.Amkyaw.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_8"
+                        android:text="[IDLE] relay not bound"
+                        android:textColor="@color/text_dim" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- ══════════ FOOTER ══════════ -->
+            <TextView
+                style="@style/Text.Amkyaw.Caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_20"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:text="@string/dash_footer"
+                android:textColor="@color/text_dim" />
+        </LinearLayout>
+    </FrameLayout>
+</ScrollView>

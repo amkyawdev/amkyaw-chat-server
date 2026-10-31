@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Primary (green) terminal button. Sharp 2dp corners, 1dp neon border.
+     Pressed = brighter fill, border brightens, no glow fill. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/bg_btn_green_pressed" />
+            <stroke
+                android:width="@dimen/border_width"
+                android:color="@color/neon_green_bright" />
+            <corners android:radius="@dimen/bubble_radius" />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/bg_btn_green_pressed" />
+            <stroke
+                android:width="@dimen/border_width"
+                android:color="@color/neon_green_bright" />
+            <corners android:radius="@dimen/bubble_radius" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/bg_btn_green" />
+            <stroke
+                android:width="@dimen/border_width"
+                android:color="@color/neon_green" />
+            <corners android:radius="@dimen/bubble_radius" />
+        </shape>
+    </item>
+</selector>
