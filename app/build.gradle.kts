@@ -17,6 +17,24 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
+    // Signing material is supplied through the environment so no keystore or
+    // password ever lands in the repository. Without it the release build stays
+    // unsigned, which is fine for a local smoke build but not for distribution.
+    val keystorePath = providers.environmentVariable("AMKYAW_KEYSTORE_FILE")
+        .orNull
+        ?.takeIf { it.isNotBlank() }
+
+    signingConfigs {
+        create("release") {
+            if (keystorePath != null) {
+                storeFile = file(keystorePath)
+                storePassword = providers.environmentVariable("AMKYAW_KEYSTORE_PASSWORD").orNull
+                keyAlias = providers.environmentVariable("AMKYAW_KEY_ALIAS").orNull
+                keyPassword = providers.environmentVariable("AMKYAW_KEY_PASSWORD").orNull
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -25,6 +43,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            if (keystorePath != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
         debug {
             applicationIdSuffix = ".debug"

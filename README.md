@@ -32,10 +32,41 @@ Requires JDK 17 and the Android SDK (compileSdk 34).
 
 ```bash
 ./gradlew :app:assembleDebug     # app/build/outputs/apk/debug/
-./gradlew :app:assembleRelease   # minified, unsigned
+./gradlew :app:assembleRelease   # minified, unsigned unless signing env vars are set
 ```
 
 CI builds both APKs on every push: `.github/workflows/build-apk.yml`.
+
+### Signed releases
+
+Release signing reads the keystore from the environment, so no keystore or
+password is ever committed:
+
+| Variable | Meaning |
+|----------|---------|
+| `AMKYAW_KEYSTORE_FILE` | path to the `.jks` file |
+| `AMKYAW_KEYSTORE_PASSWORD` | keystore password |
+| `AMKYAW_KEY_ALIAS` | key alias |
+| `AMKYAW_KEY_PASSWORD` | key password |
+
+```bash
+export AMKYAW_KEYSTORE_FILE=/secure/path/amkyaw-release.jks
+export AMKYAW_KEYSTORE_PASSWORD=...
+export AMKYAW_KEY_ALIAS=amkyaw
+export AMKYAW_KEY_PASSWORD=...
+./gradlew :app:assembleRelease
+```
+
+When those variables are absent the release build still succeeds, just unsigned.
+
+Pushing a `v*` tag publishes a GitHub release with the signed APK attached
+(`.github/workflows/release.yml`). The workflow needs four repository secrets:
+`AMKYAW_KEYSTORE_BASE64`, `AMKYAW_KEYSTORE_PASSWORD`, `AMKYAW_KEY_ALIAS` and
+`AMKYAW_KEY_PASSWORD`.
+
+> Keep the keystore file backed up somewhere safe. Losing it means you can never
+> ship an update to an installed app, because Android identifies apps by signing
+> certificate.
 
 ## Architecture
 
